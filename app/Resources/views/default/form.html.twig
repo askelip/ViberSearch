@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>Viber Search Engine</h1>
+            </div>
+			<div id="form">
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				{{ form_end(form) }}
+			</div>
+			<div id="results">
+				<ul>
+					{% for item in searchResults %}
+						<li><a href="{{ item.getUrl() }}">{{ item.getUrl() }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+        </div>
+    </div>
+{% endblock %}

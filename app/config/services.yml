@@ -1,0 +1,19 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+
+services:
+    google_custom_search:
+        class: AppBundle\Service\GoogleCustomSearchClient
+        arguments: ["@csa_guzzle.client.google_custom_search_api"]
+    yandex_search:
+        class: AppBundle\Service\YandexSearchClient
+        arguments: ["@csa_guzzle.client.yandex_search_api", "query", XML]
+    bing_search:
+        class: AppBundle\Service\BingSearchClient
+        arguments: ["@csa_guzzle.client.bing_search_api", "Query", JSON, 1]
+    search_engines:
+        class: AppBundle\Service\SearchEngineCollection
+        calls:
+            - [addEngine, ['@google_custom_search']]
+            - [addEngine, ['@yandex_search']]
+            - [addEngine, ['@bing_search']]
